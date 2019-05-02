@@ -43,6 +43,9 @@
           }
         }
       },
+      "errorMessage": {
+        "then": "Projects require a creation date."
+      },
       "required": [
         "citation",
         "resourceType"
