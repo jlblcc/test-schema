@@ -61,7 +61,7 @@
             "$ref": "#/definitions/Date"
           },
           "errorMessage": {
-            "const": "Project Citation should have at least one date with dateType = creation."
+            "contains": "Project Citation should have at least one date with dateType = creation."
           }
         }
       },
