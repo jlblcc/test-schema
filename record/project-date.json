@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "project-date",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "object",
   "properties": {
     "metadata": {
@@ -44,7 +44,7 @@
         }
       },
       "errorMessage": {
-        "then": "Projects require a creation date."
+        "if": "Projects require a creation date."
       },
       "required": [
         "citation",
