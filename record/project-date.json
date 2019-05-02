@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "project-date",
+  "version": "0.0.1",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/Metadata"
+    }
+  },
+  "required": [
+    "metadata"
+  ],
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceInfo"
+        }
+      },
+      "required": [
+        "resourceInfo"
+      ],
+      "title": "Metadata"
+    },
+    "ResourceInfo": {
+      "type": "object",
+      "if": {
+        "properties": {
+          "resourceType": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ResourceType"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "citation": {
+            "$ref": "#/definitions/Citation"
+          }
+        }
+      },
+      "required": [
+        "citation",
+        "resourceType"
+      ],
+      "title": "ResourceInfo"
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "array",
+          "contains": {
+            "$ref": "#/definitions/Date"
+          }
+        }
+      },
+      "required": [
+        "date"
+      ],
+      "title": "Citation"
+    },
+    "Date": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateType": {
+          "const": "created"
+        }
+      },
+      "required": [
+        "date",
+        "dateType"
+      ],
+      "title": "Date"
+    },
+    "ResourceType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "project"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ResourceType"
+    }
+  }
+}
