@@ -30,7 +30,7 @@
         "properties": {
           "resourceType": {
             "type": "array",
-            "items": {
+            "contains": {
               "$ref": "#/definitions/ResourceType"
             }
           }
