@@ -21,7 +21,7 @@ layout: default
   <h5 class="card-header">{{ folder.name }}</h5>
   <ul class="list-group list-group-flush">
   {% for file in folder.items %}
-    <li class="list-group-item"><a href="{{ file.path }}">{{ file.name }}</a>: {{ site.url }}{{ file.path }}</li>
+    <li class="list-group-item"><a href="{{ file.path | relative_url }}">{{ file.name }}</a>: {{ site.url }}{{ file.path | relative_url }}</li>
   {% endfor %}
   </ul>
 </div>
