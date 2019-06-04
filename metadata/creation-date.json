@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "creation-date",
+  "version": "0.0.1",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/Metadata"
+    }
+  },
+  "required": [
+    "metadata"
+  ],
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceInfo"
+        }
+      },
+      "required": [
+        "resourceInfo"
+      ],
+      "title": "Metadata"
+    },
+    "ResourceInfo": {
+      "type": "object",
+      "if": {
+        "properties": {
+          "resourceType": {
+            "type": "array",
+            "contains": {
+              "$ref": "#/definitions/ResourceType"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "citation": {
+            "$ref": "#/definitions/Citation"
+          }
+        }
+      },
+      "errorMessage": {
+        "if": "Projects require a creation date."
+      },
+      "required": [
+        "citation",
+        "resourceType"
+      ],
+      "title": "ResourceInfo"
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "array",
+          "contains": {
+            "$ref": "#/definitions/Date"
+          },
+          "errorMessage": {
+            "contains": "Citation should have at least one date with dateType = creation."
+          }
+        }
+      },
+      "required": [
+        "date"
+      ],
+      "title": "Citation"
+    },
+    "Date": {
+      "type": "object",
+      "properties": {
+        "dateType": {
+          "const": "creation",
+          "errorMessage": {
+            "const": "Metadata records require at least one date with dateType = creation."
+          }
+        }
+      },
+      "required": [
+        "date",
+        "dateType"
+      ],
+      "title": "Date"
+    },
+    "ResourceType": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "title": "ResourceType"
+    }
+  }
+}
