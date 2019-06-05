@@ -3,7 +3,7 @@
   "$id": "geospatial",
   "title": "Geospatial Module",
   "description": "Defines the metadata elements that are specific to geospatial data, for example information about how position is encoded and data quality descriptions such as datums and positional accuracy.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "object",
   "properties": {
     "metadata": {
@@ -69,7 +69,7 @@
     "ResourceInfo": {
       "type": "object",
       "title": "ResourceInfo",
-      "required": ["extent", "spatialResolution"],
+      "required": ["extent", "spatialResolution", "spatialReferenceSystem"],
       "properties": {
         "extent": {
           "type": "array",
@@ -110,12 +110,22 @@
               }
             }
           }
+        },
+        "spatialReferenceSystem": {
+          "title": "Spatial Reference Information",
+          "type": "array",
+          "minItems": 1,
+          "description": "Information about the coordinate-based system used to represent locations on the surface of the earth (or outside the earth).",
+          "items": {
+            "required": ["referenceSystemType", "referenceSystemIdentifier"]
+          }
         }
       },
       "errorMessage": {
         "required": {
           "extent": "At least one extent is required.",
-          "spatialResolution": "Spatial Resolution information about the appropriate map scale for display of the data is required."
+          "spatialResolution": "Spatial Resolution information about the appropriate map scale for display of the data is required.",
+          "spatialReferenceSystem": "Spatial Reference System information is required."
         }
       }
     }
