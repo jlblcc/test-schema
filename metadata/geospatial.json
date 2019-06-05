@@ -61,15 +61,62 @@
         }
       },
       "errorMessage": {
-        "resourceLineage": "Geospatial processing steps should be documented in Lineage."
+        "required": {
+          "resourceLineage": "Geospatial processing steps should be documented in Lineage."
+        }
       }
     },
     "ResourceInfo": {
       "type": "object",
       "title": "ResourceInfo",
-      "required": ["extent"],
+      "required": ["extent", "spatialResolution"],
+      "properties": {
+        "extent": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "title": "Extent",
+            "description": "Describe where the data is located and what it pertains to.",
+            "required": ["description"],
+            "properties": {
+              "geographicExtent": {
+                "type": "array",
+                "items": {
+                  "required": [
+                    "boundingBox",
+                    "geographicElement"
+                  ],
+                  "properties": {
+                    "geographicElement": {
+                      "type": "array",
+                      "title": "GeoJSON Objects",
+                      "minItems": 1,
+                      "errorMessage": "At least one geoJSON object (vector feature) is required for  each Geographic Extent."
+                    }
+                  },
+                  "errorMessage": {
+                    "required": {
+                      "boundingBox": "A Bounding Box is required for each Geographic Extent.",
+                      "geographicElement": "A geoJSON(vector feature) footprint is required for each Geographic Extent."
+                    }
+                  }
+                }
+              }
+            },
+            "errorMessage": {
+              "required": {
+                "description": "A description(top level summary or overview of the geographical information relevant to the dataset) is required for each extent."
+              }
+            }
+          }
+        }
+      },
       "errorMessage": {
-        "extent": "At least one extent is required."
+        "required": {
+          "extent": "At least one extent is required.",
+          "spatialResolution": "Spatial Resolution information about the appropriate map scale for display of the data is required."
+        }
       }
     }
   }
