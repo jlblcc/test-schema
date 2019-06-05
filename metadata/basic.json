@@ -50,7 +50,8 @@
         "status",
         "resourceMaintenance",
         "resourceFormat",
-        "keyword"
+        "keyword",
+        "abstract"
       ],
       "properties": {
         "status": {
@@ -87,7 +88,8 @@
       },
       "errorMessage": {
         "required": {
-          "keyword": "Thematic Keywords are required. Study Method, Place, Program, and Study Environment keywords are recommended."
+          "keyword": "Thematic Keywords are required. Study Method, Place, Program, and Study Environment keywords are recommended.",
+          "abstract": "An abstract(brief narrative summary of the content of the resource) is required."
         }
       },
       "title": "ResourceInfo"
@@ -150,9 +152,13 @@
         }
       },
       "required": [
-        "responsibleParty"
+        "responsibleParty",
+        "title"
       ],
-      "title": "Citation"
+      "title": "Citation",
+      "errorMessage": {
+        "title": "A title is required in the resource citation."
+      }
     },
     "Date": {
       "type": "object",
