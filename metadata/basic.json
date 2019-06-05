@@ -3,7 +3,7 @@
   "$id": "basic.json",
   "title": "Basic",
   "description": "The basic module defines the fundamental metadata elements that will be required for all publicly released USGS metadata records, for example, re-usable citation components and time periods, basic identification information, discovery elements for use in the Science Data Catalog (SDC), and access to data and related materials.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "object",
   "properties": {
     "metadata": {
