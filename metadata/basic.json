@@ -168,18 +168,34 @@
           "errorMessage": {
             "minItems": "At least one responsibleParty is required in the resource citation."
           }
+        },
+        "identifier": {
+          "type": "array",
+          "description": "Identifier for the resource.",
+          "contains": {
+            "type": "object",
+            "properties": {
+              "namespace": {
+                "const": "info:doi/",
+                "errorMessage": {
+                  "const": "At least one of the identifiers in the main citation must be a Digital Object Identifier(DOI), i.e, namespace = info:doi/"
+                }
+              }
+            }
+          }
         }
       },
       "required": [
         "responsibleParty",
-        "title"
+        "title",
+        "identifier"
       ],
       "title": "Citation",
       "errorMessage": {
         "required": {
           "title": "A title is required in the resource citation.",
           "responsibleParty": "At least one responsibleParty is required in the resource citation."
-         }
+        }
       }
     },
     "Date": {
