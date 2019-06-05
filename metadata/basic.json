@@ -3,7 +3,7 @@
   "$id": "basic.json",
   "title": "Basic",
   "description": "The basic module defines the fundamental metadata elements that will be required for all publicly released USGS metadata records, for example, re-usable citation components and time periods, basic identification information, discovery elements for use in the Science Data Catalog (SDC), and access to data and related materials.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "object",
   "properties": {
     "metadata": {
@@ -174,6 +174,7 @@
           "description": "Identifier for the resource.",
           "contains": {
             "type": "object",
+            "required": ["namespace"],
             "properties": {
               "namespace": {
                 "const": "info:doi/",
@@ -194,7 +195,8 @@
       "errorMessage": {
         "required": {
           "title": "A title is required in the resource citation.",
-          "responsibleParty": "At least one responsibleParty is required in the resource citation."
+          "responsibleParty": "At least one responsibleParty is required in the resource citation.",
+          "identifier": "At least one identifier(DOI) is required in the main resource citation."
         }
       }
     },
