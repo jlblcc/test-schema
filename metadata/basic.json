@@ -64,7 +64,10 @@
         "resourceMaintenance": {
           "type": "array",
           "minItems": 1,
-          "errorMessage": "Resource Maintenance of the resource is required to describe how frequently the data will be updated."
+          "errorMessage": "Resource Maintenance is required to describe how frequently the resource will be updated.",
+          "contains": {
+            "required": ["frequency"]
+          }
         },
         "resourceFormat": {
           "type": "array",
