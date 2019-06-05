@@ -177,13 +177,11 @@
             "required": ["namespace"],
             "properties": {
               "namespace": {
-                "const": "info:doi/",
-                "errorMessage": {
-                  "const": "At least one of the identifiers in the main citation must be a Digital Object Identifier(DOI), i.e, namespace = info:doi/"
-                }
+                "const": "info:doi/"
               }
             }
-          }
+          },
+          "errorMessage": "At least one of the identifiers in the main citation must be a Digital Object Identifier(DOI), i.e, namespace = info:doi/"
         }
       },
       "required": [
