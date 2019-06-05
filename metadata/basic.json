@@ -3,7 +3,7 @@
   "$id": "basic.json",
   "title": "Basic",
   "description": "The basic module defines the fundamental metadata elements that will be required for all publicly released USGS metadata records, for example, re-usable citation components and time periods, basic identification information, discovery elements for use in the Science Data Catalog (SDC), and access to data and related materials.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "object",
   "properties": {
     "metadata": {
@@ -93,16 +93,17 @@
       "title": "ResourceInfo"
     },
     "ResourceDistribution": {
-      "type": "object",
-      "required": ["distribution"],
-      "properties": {
-        "distribution": {
-          "type": "object",
-          "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data",
-          "required": ["liabilityStatement"],
-          "errorMessage": "Distribution liability statement is required."
+      "type": "array",
+      "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data.",
+      "minItems": 1,
+      "items": {
+            "type": "object",
+            "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data",
+            "required": ["liabilityStatement"],
+            "errorMessage": "Distribution liability statement is required."
         }
-      }
+      },
+      "errorMessage": "Resource Distribution must be present."
     },
     "MetadataInfo": {
       "type": "object",
