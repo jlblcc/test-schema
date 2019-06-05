@@ -3,7 +3,7 @@
   "$id": "basic.json",
   "title": "Basic",
   "description": "The basic module defines the fundamental metadata elements that will be required for all publicly released USGS metadata records, for example, re-usable citation components and time periods, basic identification information, discovery elements for use in the Science Data Catalog (SDC), and access to data and related materials.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "object",
   "properties": {
     "metadata": {
@@ -16,164 +16,165 @@
       "errorMessage": {
         "minItems": "At least one Contact is required. Identify person and organizations that will be cited for this resource.  Contacts only need to be described once, then that person/organization is given a role relative to the citation metadata context."
       }
+    }
+  },
+  "required": [
+    "metadata",
+    "contact"
+  ],
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceInfo"
+        },
+        "metadataInfo": {
+          "$ref": "#/definitions/MetadataInfo"
+        },
+        "resourceDistribution": {
+          "$ref": "#/definitions/ResourceDistribution"
+        }
+      },
+      "required": [
+        "resourceInfo",
+        "metadataInfo",
+        "resourceDistribution"
+      ],
+      "title": "Metadata"
     },
-    "required": [
-      "metadata"
-    ],
-    "definitions": {
-      "Metadata": {
-        "type": "object",
-        "properties": {
-          "resourceInfo": {
-            "$ref": "#/definitions/ResourceInfo"
-          },
-          "metadataInfo": {
-            "$ref": "#/definitions/MetadataInfo"
-          },
-          "resourceDistribution": {
-            "$ref": "#/definitions/ResourceDistribution"
-          }
+    "ResourceInfo": {
+      "type": "object",
+      "required": [
+        "citation",
+        "status",
+        "resourceMaintenance",
+        "resourceFormat",
+        "keyword"
+      ],
+      "properties": {
+        "status": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": "Status of the resource is required."
         },
-        "required": [
-          "resourceInfo",
-          "metadataInfo",
-          "resourceDistribution"
-        ],
-        "title": "Metadata"
-      },
-      "ResourceInfo": {
-        "type": "object",
-        "required": [
-          "citation",
-          "status",
-          "resourceMaintenance",
-          "resourceFormat",
-          "keyword"
-        ],
-        "properties": {
-          "status": {
-            "type": "array",
-            "minItems": 1,
-            "errorMessage": "Status of the resource is required."
-          },
-          "resourceMaintenance": {
-            "type": "array",
-            "minItems": 1,
-            "errorMessage": "Resource Maintenance of the resource is required to describe how frequently the data will be updated."
-          },
-          "resourceFormat": {
-            "type": "array",
-            "minItems": 1,
-            "errorMessage": "A description of the Resource Format is required."
-          },
-          "citation": {
-            "$ref": "#/definitions/Citation"
-          },
-          "keyword": {
-            "type": "array",
-            "description": "Controlled vocabularies for providing descriptions of the data to enable data discovery.",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "required": [
-                "keyword"
-              ],
-              "errorMessage": "A thesaurus citation is required for each set of keywords."
-            }
-          }
+        "resourceMaintenance": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": "Resource Maintenance of the resource is required to describe how frequently the data will be updated."
         },
-        "errorMessage": {
-          "required": {
-            "keyword": "Thematic Keywords are required. Study Method, Place, Program, and Study Environment keywords are recommended."
-          }
+        "resourceFormat": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": "A description of the Resource Format is required."
         },
-        "title": "ResourceInfo"
-      },
-      "ResourceDistribution": {
-        "type": "object",
-        "required": ["distribution"],
-        "properties": {
-          "distribution": {
+        "citation": {
+          "$ref": "#/definitions/Citation"
+        },
+        "keyword": {
+          "type": "array",
+          "description": "Controlled vocabularies for providing descriptions of the data to enable data discovery.",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
             "type": "object",
-            "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data",
-            "required": ["liabilityStatement"],
-            "errorMessage": "Distribution liability statement is required."
+            "required": [
+              "keyword"
+            ],
+            "errorMessage": "A thesaurus citation is required for each set of keywords."
           }
         }
       },
-      "MetadataInfo": {
-        "type": "object",
-        "required": ["metadataDate", "metadataContact"],
-        "properties": {
-          "metadataDate": {
-            "type": "array",
-            "contains": {
-              "type": "object",
-              "properties": {
-                "dateType": {
-                  "const": "lastUpate",
-                  "errorMessage": {
-                    "const": "Metadata Date requires at least one date with dateType = lastUpate."
-                  }
-                }
-              },
-              "required": [
-                "date",
-                "dateType"
-              ],
-              "title": "MetadataDate"
-            },
-            "errorMessage": {
-              "contains": "Date the metadata record was most recently updated is required."
-            }
-          },
-          "metadataContact": {
-            "type": "array",
-            "minItems": 1,
-            "errorMessage": "At least one Metadata Contact is required."
-          }
+      "errorMessage": {
+        "required": {
+          "keyword": "Thematic Keywords are required. Study Method, Place, Program, and Study Environment keywords are recommended."
         }
       },
-      "Citation": {
-        "type": "object",
-        "properties": {
-          "responsibleParty": {
-            "type": "array",
-            "minItems": 1,
-            "errorMessage": {
-              "minItems": "At least one responsibleParty is required in the resource citation."
-            }
-          }
-        },
-        "required": [
-          "responsibleParty"
-        ],
-        "title": "Citation"
-      },
-      "Date": {
-        "type": "object",
-        "properties": {
-          "dateType": {
-            "const": "creation",
-            "errorMessage": {
-              "const": "Metadata records require at least one date with dateType = creation."
-            }
-          }
-        },
-        "required": [
-          "date",
-          "dateType"
-        ],
-        "title": "Date"
-      },
-      "ResourceType": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "title": "ResourceType"
+      "title": "ResourceInfo"
+    },
+    "ResourceDistribution": {
+      "type": "object",
+      "required": ["distribution"],
+      "properties": {
+        "distribution": {
+          "type": "object",
+          "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data",
+          "required": ["liabilityStatement"],
+          "errorMessage": "Distribution liability statement is required."
+        }
       }
+    },
+    "MetadataInfo": {
+      "type": "object",
+      "required": ["metadataDate", "metadataContact"],
+      "properties": {
+        "metadataDate": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "properties": {
+              "dateType": {
+                "const": "lastUpate",
+                "errorMessage": {
+                  "const": "Metadata Date requires at least one date with dateType = lastUpate."
+                }
+              }
+            },
+            "required": [
+              "date",
+              "dateType"
+            ],
+            "title": "MetadataDate"
+          },
+          "errorMessage": {
+            "contains": "Date the metadata record was most recently updated is required."
+          }
+        },
+        "metadataContact": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": "At least one Metadata Contact is required."
+        }
+      }
+    },
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "responsibleParty": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": {
+            "minItems": "At least one responsibleParty is required in the resource citation."
+          }
+        }
+      },
+      "required": [
+        "responsibleParty"
+      ],
+      "title": "Citation"
+    },
+    "Date": {
+      "type": "object",
+      "properties": {
+        "dateType": {
+          "const": "creation",
+          "errorMessage": {
+            "const": "Metadata records require at least one date with dateType = creation."
+          }
+        }
+      },
+      "required": [
+        "date",
+        "dateType"
+      ],
+      "title": "Date"
+    },
+    "ResourceType": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "title": "ResourceType"
     }
   }
 }
