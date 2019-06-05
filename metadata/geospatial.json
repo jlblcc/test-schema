@@ -16,41 +16,36 @@
   "definitions": {
     "Metadata": {
       "type": "object",
-      "properties": {
-        "resourceInfo": {
-          "$ref": "#/definitions/ResourceInfo"
+      "if": {
+        "properties": {
+          "resourceInfo": {
+            "properties": {
+              "resourceType": {
+                "type": "array",
+                "contains": {
+                  "$ref": "#/definitions/ResourceType"
+                }
+              }
+            }
+          }
         }
+      },
+      "then": {
+        "$ref": "#/definitions/Geospatial"
+      },
+      "errorMessage": {
+        "if": "Resources with types of dataset, tile, coverage, or map must meet metadata specifications for Geospatial resources."
       },
       "required": [
         "resourceInfo"
       ],
       "title": "Metadata"
     },
-    "ResourceInfo": {
-      "type": "object",
-      "if": {
-        "properties": {
-          "resourceType": {
-            "type": "array",
-            "contains": {
-              "$ref": "#/definitions/ResourceType"
-            }
-          }
-        }
-      },
-      "then": {
-            "$ref": "#/definitions/Geospatial"
-        },
-      "errorMessage": {
-        "if": "Resources with types of dataset, tile, coverage, or map must meet metadata specifications for Geospatial resources."
-      },
-      "title": "ResourceInfo"
-    },
     "ResourceType": {
       "type": "object",
       "properties": {
         "type": {
-          "enum": ["dataset","tile", "coverage", "map"]
+          "enum": ["dataset", "tile", "coverage", "map"]
         }
       },
       "required": [
@@ -58,7 +53,20 @@
       ],
       "title": "ResourceType"
     },
-    "Geospatial":{
+    "Geospatial": {
+      "required": ["resourceInfo", "resourceLineage"],
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceInfo"
+        }
+      },
+      "errorMessage": {
+        "resourceLineage": "Geospatial processing steps should be documented in Lineage."
+      }
+    },
+    "ResourceInfo": {
+      "type": "object",
+      "title": "ResourceInfo",
       "required": ["extent"],
       "errorMessage": {
         "extent": "At least one extent is required."
