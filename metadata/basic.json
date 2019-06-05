@@ -119,84 +119,84 @@
         "description": "Describes how the public can access the data and relevant information a user would need to know regarding the access and use of the data",
         "required": ["liabilityStatement"],
         "errorMessage": "Distribution liability statement is required."
+      },
+      "errorMessage": "Resource Distribution must be present."
+    },
+    "MetadataInfo": {
+      "type": "object",
+      "required": ["metadataDate", "metadataContact"],
+      "properties": {
+        "metadataDate": {
+          "type": "array",
+          "contains": {
+            "type": "object",
+            "properties": {
+              "dateType": {
+                "const": "lastUpate",
+                "errorMessage": {
+                  "const": "Metadata Date requires at least one date with dateType = lastUpate."
+                }
+              }
+            },
+            "required": [
+              "date",
+              "dateType"
+            ],
+            "title": "MetadataDate"
+          },
+          "errorMessage": {
+            "contains": "Date the metadata record was most recently updated is required."
+          }
+        },
+        "metadataContact": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": "At least one Metadata Contact is required."
+        }
       }
     },
-    "errorMessage": "Resource Distribution must be present."
-  },
-  "MetadataInfo": {
-    "type": "object",
-    "required": ["metadataDate", "metadataContact"],
-    "properties": {
-      "metadataDate": {
-        "type": "array",
-        "contains": {
-          "type": "object",
-          "properties": {
-            "dateType": {
-              "const": "lastUpate",
-              "errorMessage": {
-                "const": "Metadata Date requires at least one date with dateType = lastUpate."
-              }
-            }
-          },
-          "required": [
-            "date",
-            "dateType"
-          ],
-          "title": "MetadataDate"
-        },
-        "errorMessage": {
-          "contains": "Date the metadata record was most recently updated is required."
+    "Citation": {
+      "type": "object",
+      "properties": {
+        "responsibleParty": {
+          "type": "array",
+          "minItems": 1,
+          "errorMessage": {
+            "minItems": "At least one responsibleParty is required in the resource citation."
+          }
         }
       },
-      "metadataContact": {
-        "type": "array",
-        "minItems": 1,
-        "errorMessage": "At least one Metadata Contact is required."
-      }
-    }
-  },
-  "Citation": {
-    "type": "object",
-    "properties": {
-      "responsibleParty": {
-        "type": "array",
-        "minItems": 1,
-        "errorMessage": {
-          "minItems": "At least one responsibleParty is required in the resource citation."
-        }
+      "required": [
+        "responsibleParty",
+        "title"
+      ],
+      "title": "Citation",
+      "errorMessage": {
+        "title": "A title is required in the resource citation."
       }
     },
-    "required": [
-      "responsibleParty",
-      "title"
-    ],
-    "title": "Citation",
-    "errorMessage": {
-      "title": "A title is required in the resource citation."
-    }
-  },
-  "Date": {
-    "type": "object",
-    "properties": {
-      "dateType": {
-        "const": "creation",
-        "errorMessage": {
-          "const": "Metadata records require at least one date with dateType = creation."
+    "Date": {
+      "type": "object",
+      "properties": {
+        "dateType": {
+          "const": "creation",
+          "errorMessage": {
+            "const": "Metadata records require at least one date with dateType = creation."
+          }
         }
-      }
+      },
+      "required": [
+        "date",
+        "dateType"
+      ],
+      "title": "Date"
     },
-    "required": [
-      "date",
-      "dateType"
-    ],
-    "title": "Date"
-  },
-  "ResourceType": {
-    "type": "object",
-    "required": [
-      "type"
-    ],
-    "title": "ResourceType"
+    "ResourceType": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "title": "ResourceType"
+    }
   }
 }
