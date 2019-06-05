@@ -108,7 +108,8 @@
         "required": {
           "keyword": "Thematic Keywords are required. Study Method, Place, Program, and Study Environment keywords are recommended.",
           "abstract": "An abstract(brief narrative summary of the content of the resource) is required.",
-          "purpose": "A purpose, a summary of intentions for which the resource was created, is required."
+          "purpose": "A purpose, a summary of intentions for which the resource was created, is required.",
+          "citation": "A main resource Citation is required."
         }
       },
       "title": "ResourceInfo"
@@ -175,7 +176,10 @@
       ],
       "title": "Citation",
       "errorMessage": {
-        "title": "A title is required in the resource citation."
+        "required": {
+          "title": "A title is required in the resource citation.",
+          "responsibleParty": "At least one responsibleParty is required in the resource citation."
+         }
       }
     },
     "Date": {
