@@ -90,10 +90,10 @@
         "timePeriod": {
           "type": "object",
           "oneOf": [{
-              "required": "startDateTime"
+              "required": ["startDateTime"]
             },
             {
-              "required": "startGeologicAge"
+              "required": ["startGeologicAge"]
             }
           ],
           "errorMessage": {
