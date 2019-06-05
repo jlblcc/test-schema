@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "geospatial",
+  "title": "Geospatial Module",
+  "description": "Defines the metadata elements that are specific to geospatial data, for example information about how position is encoded and data quality descriptions such as datums and positional accuracy.",
+  "version": "0.0.0",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/Metadata"
+    }
+  },
+  "required": [
+    "metadata"
+  ],
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "$ref": "#/definitions/ResourceInfo"
+        }
+      },
+      "required": [
+        "resourceInfo"
+      ],
+      "title": "Metadata"
+    },
+    "ResourceInfo": {
+      "type": "object",
+      "if": {
+        "properties": {
+          "resourceType": {
+            "type": "array",
+            "contains": {
+              "$ref": "#/definitions/ResourceType"
+            }
+          }
+        }
+      },
+      "then": {
+            "$ref": "#/definitions/Geospatial"
+        },
+      "errorMessage": {
+        "if": "Geospatial dataset."
+      },
+      "title": "ResourceInfo"
+    },
+    "ResourceType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["dataset","tile", "coverage", "map"]
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ResourceType"
+    },
+    "Geospatial":{
+      "required": ["extent"]
+    }
+  }
+}
