@@ -42,7 +42,7 @@
             "$ref": "#/definitions/Geospatial"
         },
       "errorMessage": {
-        "if": "Geospatial dataset."
+        "if": "Resources with types of dataset, tile, coverage, or map must meet metadata specifications for Geospatial resources."
       },
       "title": "ResourceInfo"
     },
@@ -59,7 +59,10 @@
       "title": "ResourceType"
     },
     "Geospatial":{
-      "required": ["extent"]
+      "required": ["extent"],
+      "errorMessage": {
+        "extent": "At least one extent is required."
+      }
     }
   }
 }
