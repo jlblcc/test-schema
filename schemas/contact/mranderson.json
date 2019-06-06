@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "The Metadata",
+  "description": "Follow the white rabbit.",
+  "$id": "has-organization",
+  "version": "0.0.1",
+  "type": "object",
+  "required": ["what", "is", "metadata"],
+  "errorMessage": {
+    "required": {
+      "what": "The Metadata.",
+      "is": "Do you want to know...what it is?",
+      "metadata": "The Metadata is everywhere. It is all around us. Even now, in this very room. You can see it when you look out your window or when you turn on your television. You can see it when you go to work...when you go to dinner...when you pay your taxes..."
+    }
+  }
+}
