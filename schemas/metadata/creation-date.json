@@ -1,7 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "project-date",
-  "version": "0.0.6",
+  "title": "Creation Date",
+  "description": "Require a creation date.",
+  "$id": "creation-date",
+  "version": "0.0.3",
   "type": "object",
   "properties": {
     "metadata": {
@@ -44,7 +46,7 @@
         }
       },
       "errorMessage": {
-        "if": "Projects require a creation date."
+        "if": "Resources require a creation date."
       },
       "required": [
         "citation",
@@ -61,7 +63,7 @@
             "$ref": "#/definitions/Date"
           },
           "errorMessage": {
-            "contains": "Project Citation should have at least one date with dateType = creation."
+            "contains": "Citation should have at least one date with dateType = creation."
           }
         }
       },
@@ -76,7 +78,7 @@
         "dateType": {
           "const": "creation",
           "errorMessage": {
-            "const": "Projects require at least one date with dateType = creation."
+            "const": "Metadata records require at least one date with dateType = creation."
           }
         }
       },
@@ -88,11 +90,6 @@
     },
     "ResourceType": {
       "type": "object",
-      "properties": {
-        "type": {
-          "const": "project"
-        }
-      },
       "required": [
         "type"
       ],
