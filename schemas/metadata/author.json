@@ -3,7 +3,7 @@
   "title": "Author",
   "description": "Require an author.",
   "$id": "author.json",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "object",
   "properties": {
     "metadata": {
@@ -55,7 +55,7 @@
           },
           "errorMessage": {
             "minItems": "At least one responsibleParty is required in the resource citation.",
-            "contains": "At least one author should be list in citation."
+            "contains": "At least one author should be present in citation."
           }
         }
       },
