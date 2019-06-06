@@ -28,29 +28,14 @@
     },
     "ResourceInfo": {
       "type": "object",
-      "if": {
-        "properties": {
-          "resourceType": {
-            "type": "array",
-            "contains": {
-              "$ref": "#/definitions/ResourceType"
-            }
-          }
+      "properties": {
+        "citation": {
+          "$ref": "#/definitions/Citation"
         }
       },
-      "then": {
-        "properties": {
-          "citation": {
-            "$ref": "#/definitions/Citation"
-          }
-        }
-      },
-      "errorMessage": {
-        "if": "Resources require a creation date."
-      },
+      "errorMessage": "Main citation is required.",
       "required": [
-        "citation",
-        "resourceType"
+        "citation"
       ],
       "title": "ResourceInfo"
     },
@@ -63,7 +48,8 @@
           "contains": {
             "properties": {
               "role": {
-                "const": "author"
+                "const": "author",
+                "errorMessage": "One role must be author."
               }
             }
           },
@@ -77,13 +63,6 @@
         "responsibleParty"
       ],
       "title": "Citation"
-    },
-    "ResourceType": {
-      "type": "object",
-      "required": [
-        "type"
-      ],
-      "title": "ResourceType"
     }
   }
 }
