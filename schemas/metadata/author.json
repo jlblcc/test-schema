@@ -1,7 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "creation-date",
-  "version": "0.0.2",
+  "title": "Author",
+  "description": "Require an author.",
+  "$id": "author.json",
+  "version": "0.0.1",
   "type": "object",
   "properties": {
     "metadata": {
@@ -44,7 +46,7 @@
         }
       },
       "errorMessage": {
-        "if": "Projects require a creation date."
+        "if": "Resources require a creation date."
       },
       "required": [
         "citation",
@@ -55,36 +57,26 @@
     "Citation": {
       "type": "object",
       "properties": {
-        "date": {
+        "responsibleParty": {
           "type": "array",
+          "minItems": 1,
           "contains": {
-            "$ref": "#/definitions/Date"
+            "properties": {
+              "role": {
+                "const": "author"
+              }
+            }
           },
           "errorMessage": {
-            "contains": "Citation should have at least one date with dateType = creation."
+            "minItems": "At least one responsibleParty is required in the resource citation.",
+            "contains": "At least one author should be list in citation."
           }
         }
       },
       "required": [
-        "date"
+        "responsibleParty"
       ],
       "title": "Citation"
-    },
-    "Date": {
-      "type": "object",
-      "properties": {
-        "dateType": {
-          "const": "creation",
-          "errorMessage": {
-            "const": "Metadata records require at least one date with dateType = creation."
-          }
-        }
-      },
-      "required": [
-        "date",
-        "dateType"
-      ],
-      "title": "Date"
     },
     "ResourceType": {
       "type": "object",

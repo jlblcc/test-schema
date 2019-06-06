@@ -1,7 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project Date",
   "$id": "project-date",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "object",
   "properties": {
     "metadata": {
