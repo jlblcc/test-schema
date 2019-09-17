@@ -1,0 +1,62 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "$id":"tabular",
+  "title":"Tabular Dictionary",
+  "description":"Requrements for tabular resources.",
+  "version":"0.0.3",
+  "type":"object",
+  "properties":{
+    "metadata":{
+      "$ref":"#/definitions/Metadata"
+    },
+    "dataDictionary":{
+      "minItems":1
+    }
+  },
+  "required":[
+    "metadata",
+    "dataDictionary"
+  ],
+  "errorMessage":{
+    "required":{
+      "dataDictionary":"Tabular Dataset must have a Data Dictionary."
+    }
+  },
+  "definitions":{
+    "Metadata":{
+      "type":"object",
+      "properties":{
+        "resourceInfo":{
+          "properties":{
+            "resourceType":{
+              "type":"array",
+              "contains":{
+                "$ref":"#/definitions/ResourceType"
+              },
+              "errorMessage":"Resource Type must contain at least one tabularDataset."
+            }
+          }
+        }
+      },
+      "required":[
+        "resourceInfo"
+      ],
+      "title":"Metadata"
+    },
+    "ResourceType":{
+      "type":"object",
+      "properties":{
+        "type":{
+          "enum":[
+            "tabularDataset"
+          ]
+        }
+      },
+      "errorMessage":"Resource Type must contain at least one tabularDataset.",
+      "required":[
+        "type"
+      ],
+      "title":"ResourceType"
+    }
+  }
+}
